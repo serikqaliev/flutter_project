@@ -1,6 +1,10 @@
 // ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/cupertino.dart';
+import 'package:lesson_1/src/common/constants/color_constants.dart';
+import 'package:lesson_1/src/common/constants/padding_constants.dart';
+import 'package:lesson_1/src/common/widgets/custom_button.dart';
+import 'package:lesson_1/src/common/widgets/custom_text_field.dart';
+import 'package:lesson_1/src/common/widgets/text_field_divider.dart';
 import 'package:lesson_1/src/router/router_const.dart';
 
 class AuthScreen extends StatelessWidget {
@@ -9,10 +13,10 @@ class AuthScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      backgroundColor: Color(0xFFE5E5E5),
+      backgroundColor: AppColors.scaffoldBackground,
       navigationBar: const CupertinoNavigationBar(
         border: Border(),
-        backgroundColor: CupertinoColors.white,
+        backgroundColor: AppColors.white,
         middle: Text('Авторизация'),
       ),
       child: SafeArea(
@@ -20,53 +24,25 @@ class AuthScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            CupertinoTextField(
-              decoration: BoxDecoration(color: CupertinoColors.white),
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 19),
-              placeholder: 'Логин или почта',
-            ),
-            Container(
-              height: 1,
-              color: Color(0xFFE0E6ED),
-              margin: EdgeInsets.symmetric(horizontal: 16),
-            ),
-            CupertinoTextField(
-              decoration: BoxDecoration(color: CupertinoColors.white),
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 19),
-              placeholder: 'Пароль',
-            ),
-            SizedBox(
-              height: 32,
-            ),
+            CustomTextField(placeholder: 'Логин или почта'),
+            TextFieldDivider(),
+            CustomTextField(placeholder: 'Пароль'),
+            SizedBox(height: 32),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: CupertinoButton(
-                padding: EdgeInsets.symmetric(vertical: 20),
-                color: Color(0xFF4631D2),
-                child: Text(
-                  'Войти',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                onPressed: () {},
-              ),
-            ),
-            SizedBox(
-              height: 19,
-            ),
+                padding: AppPaddings.horizontal,
+                child: CustomButton(
+                  title: 'Войти',
+                  onPressed: () {},
+                )),
+            SizedBox(height: 19),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: CupertinoButton(
-                padding: EdgeInsets.symmetric(vertical: 20),
-                color: Color(0xFF4631D2),
-                child: Text(
-                  'Зарегистрироваться',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                onPressed: () {
-                  Navigator.pushNamed(context, RegistrationRoute);
-                },
-              ),
-            )
+                padding: AppPaddings.horizontal,
+                child: CustomButton(
+                  title: 'Зарегистрироваться',
+                  onPressed: () {
+                    Navigator.pushNamed(context, RegistrationRoute);
+                  },
+                ))
           ],
         ),
       ),
