@@ -1,11 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/cupertino.dart';
+import 'package:lesson_1/screens/registration/registration_screen.dart';
 
 class AuthScreen extends StatelessWidget {
   const AuthScreen({Key? key}) : super(key: key);
-
-  foo() {}
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +62,9 @@ class AuthScreen extends StatelessWidget {
                   'Зарегистрироваться',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, '/auth/registration');
+                },
               ),
             )
           ],

@@ -2,6 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:lesson_1/screens/auth/auth_screen.dart';
+import 'package:lesson_1/screens/registration/registration_screen.dart';
 
 void main() {
   runApp(const MyApp());
