@@ -24,9 +24,7 @@ class RegistrationScreen extends StatelessWidget {
                   SizedBox(
                     height: 32,
                   ),
-                  CupertinoTextField(
-                    decoration: BoxDecoration(color: CupertinoColors.white),
-                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 19),
+                  CustomTextField(
                     placeholder: 'Логин',
                   ),
                   Container(
@@ -34,31 +32,19 @@ class RegistrationScreen extends StatelessWidget {
                     color: Color(0xFFE0E6ED),
                     margin: EdgeInsets.symmetric(horizontal: 16),
                   ),
-                  CupertinoTextField(
-                    decoration: BoxDecoration(color: CupertinoColors.white),
-                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 19),
-                    placeholder: 'Телефон',
-                  ),
+                  CustomTextField(placeholder: 'Телефон'),
                   Container(
                     height: 1,
                     color: Color(0xFFE0E6ED),
                     margin: EdgeInsets.symmetric(horizontal: 16),
                   ),
-                  CupertinoTextField(
-                    decoration: BoxDecoration(color: CupertinoColors.white),
-                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 19),
-                    placeholder: 'Почта',
-                  ),
+                  CustomTextField(placeholder: 'Почта'),
                   Container(
                     height: 1,
                     color: Color(0xFFE0E6ED),
                     margin: EdgeInsets.symmetric(horizontal: 16),
                   ),
-                  CupertinoTextField(
-                    decoration: BoxDecoration(color: CupertinoColors.white),
-                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 19),
-                    placeholder: 'Пароль',
-                  ),
+                  CustomTextField(placeholder: 'Пароль'),
                   Container(
                     height: 1,
                     color: Color(0xFFE0E6ED),
@@ -71,10 +57,8 @@ class RegistrationScreen extends StatelessWidget {
                 children: [
                   Padding(
                     padding: EdgeInsets.only(left: 16, right: 16),
-                    child: CupertinoButton(
-                      color: Color(0xFF4631D2),
-                      child: Text('Создать аккаунт'),
-                      onPressed: () {},
+                    child: CustomButton(
+                      title: 'Создать аккаунт',
                     ),
                   ),
                   SizedBox(
@@ -86,6 +70,42 @@ class RegistrationScreen extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class CustomButton extends StatelessWidget {
+  const CustomButton({
+    Key? key,
+    required this.title,
+  }) : super(key: key);
+
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoButton(
+      color: Color(0xFF4631D2),
+      child: Text(title),
+      onPressed: () {},
+    );
+  }
+}
+
+class CustomTextField extends StatelessWidget {
+  const CustomTextField({
+    Key? key,
+    required this.placeholder,
+  }) : super(key: key);
+
+  final String placeholder;
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoTextField(
+      decoration: BoxDecoration(color: CupertinoColors.white),
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 19),
+      placeholder: placeholder,
     );
   }
 }
