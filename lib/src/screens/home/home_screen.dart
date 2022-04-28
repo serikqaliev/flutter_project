@@ -2,6 +2,7 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:flutter/cupertino.dart';
 import 'package:lesson_1/src/screens/auth/auth_screen.dart';
+import 'package:lesson_1/src/screens/feed/feed_screen.dart';
 import 'package:lesson_1/src/screens/registration/registration_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -23,7 +24,7 @@ class HomeScreen extends StatelessWidget {
           builder: (context) {
             switch (index) {
               case 0:
-                return AuthScreen();
+                return FeedScreen();
               case 1:
                 return RegistrationScreen();
               case 2:
