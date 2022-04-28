@@ -3,7 +3,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:lesson_1/src/common/constants/color_constants.dart';
 import 'package:lesson_1/src/router/router.dart';
-import 'package:lesson_1/src/screens/auth/auth_screen.dart';
 import 'package:lesson_1/src/screens/home/home_screen.dart';
 
 void main() {

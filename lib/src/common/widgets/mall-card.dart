@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-
 import '../constants/color_constants.dart';
 import '../constants/padding_constants.dart';
 import 'custom_favourite_button.dart';
