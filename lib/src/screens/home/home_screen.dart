@@ -1,8 +1,11 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables
 // ignore_for_file: prefer_const_constructors
 import 'package:flutter/cupertino.dart';
+
+import 'package:lesson_1/src/common/constants/color_constants.dart';
 import 'package:lesson_1/src/screens/auth/auth_screen.dart';
 import 'package:lesson_1/src/screens/feed/feed_screen.dart';
+import 'package:lesson_1/src/screens/profile/profile_screen.dart';
 import 'package:lesson_1/src/screens/registration/registration_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -12,11 +15,16 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return CupertinoTabScaffold(
       tabBar: CupertinoTabBar(
+        activeColor: AppColors.main,
         items: [
-          BottomNavigationBarItem(icon: Icon(CupertinoIcons.home)),
-          BottomNavigationBarItem(icon: Icon(CupertinoIcons.map)),
-          BottomNavigationBarItem(icon: Icon(CupertinoIcons.heart)),
-          BottomNavigationBarItem(icon: Icon(CupertinoIcons.person)),
+          BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.home), label: 'Лента'),
+          BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.map), label: 'Карта'),
+          BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.heart), label: 'Избранные'),
+          BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.person), label: 'Профиль'),
         ],
       ),
       tabBuilder: (context, index) {
@@ -30,7 +38,7 @@ class HomeScreen extends StatelessWidget {
               case 2:
                 return AuthScreen();
               case 3:
-                return RegistrationScreen();
+                return ProfileScreen();
               default:
                 return AuthScreen();
             }

@@ -58,6 +58,7 @@ flutter:
     - assets/images/mega.png
     - assets/images/dostykplaza.png
     - assets/images/forum.png
+    - assets/images/profilepic.png
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

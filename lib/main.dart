@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
     return CupertinoApp(
       theme: CupertinoThemeData(
         scaffoldBackgroundColor: AppColors.scaffoldBackground,
+        primaryColor: AppColors.main,
       ),
       onGenerateRoute: AppRouter.generateRoute,
       home: HomeScreen(),
