@@ -56,15 +56,17 @@ class _AuthScreenState extends State<AuthScreen> {
 
                   try {
                     Response response = await dio.post(
-                      'http://localhost:5091/api/user/login',
+                      'http://api.codeunion.kz/api/v1/auth/login',
                       data: {
                         "email": emailController.text,
                         "password": passwordController.text,
                       },
                     );
 
-                    tokensBox.put('access', response.data['accessToken']);
-                    tokensBox.put('refresh', response.data['refreshToken']);
+                    tokensBox.put(
+                        'access', response.data['tokens']['accessToken']);
+                    tokensBox.put(
+                        'refresh', response.data['tokens']['refreshToken']);
 
                     print(tokensBox.get('access'));
                     print(tokensBox.get('refresh'));
