@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:lesson_1/src/common/constants/color_constants.dart';
 import 'package:lesson_1/src/common/constants/padding_constants.dart';
 import 'package:lesson_1/src/common/widgets/custom_button.dart';
@@ -51,6 +52,8 @@ class _AuthScreenState extends State<AuthScreen> {
               child: CustomButton(
                 title: 'Войти',
                 onPressed: () async {
+                  Box tokensBox = Hive.box('tokens');
+
                   try {
                     Response response = await dio.post(
                       'http://localhost:5091/api/user/login',
@@ -60,7 +63,12 @@ class _AuthScreenState extends State<AuthScreen> {
                       },
                     );
 
-                    print(response.data["accessToken"]);
+                    tokensBox.put('access', response.data['accessToken']);
+                    tokensBox.put('refresh', response.data['refreshToken']);
+
+                    print(tokensBox.get('access'));
+                    print(tokensBox.get('refresh'));
+
                     Navigator.pushReplacementNamed(context, HomeRoute);
                   } on DioError catch (e) {
                     showCupertinoModalPopup(
