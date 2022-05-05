@@ -1,8 +1,8 @@
 // ignore_for_file: constant_identifier_names
 
-const String MainRoute = '/';
+const String MainRoute = '/main';
 
-const String AuthRoute = '/auth/login';
+const String AuthRoute = '/';
 const String RegistrationRoute = '/auth/registration';
 
 const String HomeRoute = '/restaurants';

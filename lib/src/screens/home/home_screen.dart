@@ -4,7 +4,9 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:lesson_1/src/common/constants/color_constants.dart';
 import 'package:lesson_1/src/screens/auth/auth_screen.dart';
+import 'package:lesson_1/src/screens/favourites/favourites_screen.dart';
 import 'package:lesson_1/src/screens/feed/feed_screen.dart';
+import 'package:lesson_1/src/screens/map/map_screen.dart';
 import 'package:lesson_1/src/screens/profile/profile_screen.dart';
 import 'package:lesson_1/src/screens/registration/registration_screen.dart';
 
@@ -34,9 +36,9 @@ class HomeScreen extends StatelessWidget {
               case 0:
                 return FeedScreen();
               case 1:
-                return RegistrationScreen();
+                return MapScreen();
               case 2:
-                return AuthScreen();
+                return FavouritesScreen();
               case 3:
                 return ProfileScreen();
               default:

@@ -5,20 +5,21 @@ import 'package:lesson_1/src/common/constants/color_constants.dart';
 import '../../common/widgets/mall-card.dart';
 import '../../services/mall-service.dart';
 
-class FeedScreen extends StatefulWidget {
-  const FeedScreen({Key? key}) : super(key: key);
+class FavouritesScreen extends StatefulWidget {
+  const FavouritesScreen({Key? key}) : super(key: key);
 
   @override
-  State<FeedScreen> createState() => _FeedScreenState();
+  State<FavouritesScreen> createState() => _FavouritesScreenState();
 }
 
-class _FeedScreenState extends State<FeedScreen> {
-  final mallItems = MallService.mallData;
-  var items = <Mall>[];
+class _FavouritesScreenState extends State<FavouritesScreen> {
+  final mallItems =
+      MallService.mallData.where((element) => element.hasLike).toList();
+  List<Mall?> items = <Mall?>[].toList();
 
   @override
   void initState() {
-    items.addAll(mallItems);
+    mallItems.isNotEmpty ? items.addAll(mallItems) : null;
     super.initState();
   }
 
@@ -74,21 +75,28 @@ class _FeedScreenState extends State<FeedScreen> {
                 height: 20,
               ),
               Expanded(
-                child: ListView.separated(
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    return MallCard(
-                      title: items[index].title,
-                      description: items[index].description,
-                      imgPath: items[index].imgPath,
-                      address: items[index].address,
-                      hasLike: items[index].hasLike,
-                      onChanged: items[index].setHasLike,
-                    );
-                  },
-                  separatorBuilder: (context, index) => SizedBox(height: 20),
-                  itemCount: items.length,
-                ),
+                child: items.isNotEmpty
+                    ? ListView.separated(
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          Mall? item = items[index];
+                          print(item);
+                          return MallCard(
+                            title: items[index]!.title,
+                            description: items[index]!.description,
+                            imgPath: items[index]!.imgPath,
+                            address: items[index]!.address,
+                            hasLike: items[index]!.hasLike,
+                            onChanged: items[index]!.setHasLike,
+                          );
+                        },
+                        separatorBuilder: (context, index) =>
+                            SizedBox(height: 20),
+                        itemCount: items.length,
+                      )
+                    : Center(
+                        child: Text('Пусто'),
+                      ),
               ),
             ],
           ),
