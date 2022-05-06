@@ -4,7 +4,7 @@ import 'package:lesson_1/src/common/constants/color_constants.dart';
 class CustomTextField extends StatelessWidget {
   const CustomTextField({
     Key? key,
-    this.placeholder = 'Введите',
+    this.placeholder = '',
     this.controller,
     this.suffix,
   }) : super(key: key);

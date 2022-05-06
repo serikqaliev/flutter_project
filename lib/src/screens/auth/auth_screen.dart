@@ -53,7 +53,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 onPressed: () async {
                   try {
                     Response response = await dio.post(
-                      'http://localhost:5091/api/user/login',
+                      'http://api.codeunion.kz/api/v1/auth/login',
                       data: {
                         "email": emailController.text,
                         "password": passwordController.text,
@@ -78,7 +78,7 @@ class _AuthScreenState extends State<AuthScreen> {
                         );
                       },
                     );
-                    throw e;
+                    rethrow;
                   }
                 },
               ),
