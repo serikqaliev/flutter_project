@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:lesson_1/src/common/constants/color_constants.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -58,7 +59,14 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
                 alignment: Alignment.centerLeft,
-                onPressed: () {})
+                onPressed: () async {
+                  Box tokensBox = Hive.box('tokens');
+                  if (tokensBox.isNotEmpty) {
+                    tokensBox.clear();
+                  } else {
+                    return;
+                  }
+                })
           ],
         ),
       ),
