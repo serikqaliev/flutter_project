@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:lesson_1/src/common/constants/color_constants.dart';
 import 'package:lesson_1/src/common/constants/padding_constants.dart';
-import 'package:lesson_1/src/common/models/tokens_model.dart';
+import 'package:lesson_1/src/common/models/tokens/tokens_model.dart';
 import 'package:lesson_1/src/common/widgets/custom_button.dart';
 import 'package:lesson_1/src/common/widgets/custom_text_field.dart';
 import 'package:lesson_1/src/common/widgets/text_field_divider.dart';
