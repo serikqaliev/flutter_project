@@ -64,9 +64,8 @@ class _AuthScreenState extends State<AuthScreen> {
                       },
                     );
 
-                    TokensModel tokensModel = TokensModel(
-                      access: response.data['tokens']['accessToken'],
-                      refresh: response.data['tokens']['refreshToken'],
+                    TokensModel tokensModel = TokensModel.fromJson(
+                      response.data['tokens'],
                     );
 
                     tokensBox.put('access', tokensModel.access);
