@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:lesson_1/src/common/constants/color_constants.dart';
 import 'package:lesson_1/src/common/constants/padding_constants.dart';
+import 'package:lesson_1/src/common/models/tokens_model.dart';
 import 'package:lesson_1/src/common/widgets/custom_button.dart';
 import 'package:lesson_1/src/common/widgets/custom_text_field.dart';
 import 'package:lesson_1/src/common/widgets/text_field_divider.dart';
@@ -63,10 +64,13 @@ class _AuthScreenState extends State<AuthScreen> {
                       },
                     );
 
-                    tokensBox.put(
-                        'access', response.data['tokens']['accessToken']);
-                    tokensBox.put(
-                        'refresh', response.data['tokens']['refreshToken']);
+                    TokensModel tokensModel = TokensModel(
+                      access: response.data['tokens']['accessToken'],
+                      refresh: response.data['tokens']['refreshToken'],
+                    );
+
+                    tokensBox.put('access', tokensModel.access);
+                    tokensBox.put('refresh', tokensModel.refresh);
 
                     print(tokensBox.get('access'));
                     print(tokensBox.get('refresh'));
