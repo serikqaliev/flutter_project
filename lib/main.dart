@@ -28,7 +28,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     Box tokensBox = Hive.box('tokens');
 
-    if (tokensBox.get('access') != null || tokensBox.get('refresh')) {
+    if (tokensBox.get('access') != null || tokensBox.get('refresh') != null) {
       initialRoute = HomeRoute;
       debugPrint('open main');
     }
