@@ -4,8 +4,8 @@ part of 'log_in_bloc.dart';
 abstract class LogInEvent {}
 
 class LogInPressed extends LogInEvent {
-  final String email;
-  final String password;
+  final String? email;
+  final String? password;
 
   LogInPressed({
     required this.email,
