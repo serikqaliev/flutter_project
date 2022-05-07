@@ -79,8 +79,6 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
                     ? ListView.separated(
                         shrinkWrap: true,
                         itemBuilder: (context, index) {
-                          Mall? item = items[index];
-                          print(item);
                           return MallCard(
                             title: items[index]!.title,
                             description: items[index]!.description,

@@ -1,14 +1,14 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lesson_1/src/common/constants/color_constants.dart';
 import 'package:lesson_1/src/common/constants/padding_constants.dart';
-import 'package:lesson_1/src/common/models/tokens/tokens_model.dart';
 import 'package:lesson_1/src/common/widgets/custom_button.dart';
 import 'package:lesson_1/src/common/widgets/custom_text_field.dart';
 import 'package:lesson_1/src/common/widgets/text_field_divider.dart';
-import 'package:lesson_1/src/router/router_const.dart';
+import 'package:lesson_1/src/screens/auth/bloc/log_in_bloc.dart';
+import '../../router/router_const.dart';
 import 'package:lesson_1/src/screens/registration/registration_screen.dart';
 
 class AuthScreen extends StatefulWidget {
@@ -50,38 +50,17 @@ class _AuthScreenState extends State<AuthScreen> {
             SizedBox(height: 32),
             Padding(
               padding: AppPaddings.horizontal,
-              child: CustomButton(
-                title: 'Войти',
-                onPressed: () async {
-                  Box tokensBox = Hive.box('tokens');
-
-                  try {
-                    Response response = await dio.post(
-                      'http://api.codeunion.kz/api/v1/auth/login',
-                      data: {
-                        "email": emailController.text,
-                        "password": passwordController.text,
-                      },
-                    );
-
-                    TokensModel tokensModel = TokensModel.fromJson(
-                      response.data['tokens'],
-                    );
-
-                    tokensBox.put('access', tokensModel.access);
-                    tokensBox.put('refresh', tokensModel.refresh);
-
-                    print(tokensBox.get('access'));
-                    print(tokensBox.get('refresh'));
-
+              child: BlocConsumer<LogInBloc, LogInState>(
+                listener: (context, state) {
+                  if (state is LogInLoaded) {
                     Navigator.pushReplacementNamed(context, HomeRoute);
-                  } on DioError catch (e) {
+                  } else if (state is LogInFailed) {
                     showCupertinoModalPopup(
                       context: context,
                       builder: (context) {
                         return CupertinoAlertDialog(
                           title: Text('Ошибка'),
-                          content: Text(e.response!.data['message']),
+                          content: Text(state.message ?? ''),
                           actions: [
                             CupertinoButton(
                               child: Text('OK'),
@@ -91,8 +70,22 @@ class _AuthScreenState extends State<AuthScreen> {
                         );
                       },
                     );
-                    rethrow;
                   }
+                },
+                builder: (context, state) {
+                  return CustomButton(
+                    title: 'Войти',
+                    onPressed: state is LogInLoading
+                        ? null
+                        : () {
+                            context.read<LogInBloc>().add(
+                                  LogInPressed(
+                                    email: emailController.text,
+                                    password: passwordController.text,
+                                  ),
+                                );
+                          },
+                  );
                 },
               ),
             ),
