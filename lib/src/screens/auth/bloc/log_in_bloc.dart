@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -15,10 +17,12 @@ class LogInBloc extends Bloc<LogInEvent, LogInState> {
   final Box tokensBox = Hive.box('tokens');
 
   @override
-  Stream<LogInState> mapEventToState(LogInEvent event) async* {
-    yield LogInLoading();
-
+  Stream<LogInState> mapEventToState(
+    LogInEvent event,
+  ) async* {
     if (event is LogInPressed) {
+      yield LogInLoading();
+
       try {
         Response response = await dio.post(
           'http://api.codeunion.kz/api/v1/auth/login',
@@ -33,14 +37,15 @@ class LogInBloc extends Bloc<LogInEvent, LogInState> {
         );
 
         tokensBox.put('access', tokensModel.access);
-        tokensBox.put('access', tokensModel.refresh);
+        tokensBox.put('refresh', tokensModel.refresh);
 
         yield LogInLoaded();
       } on DioError catch (e) {
-        yield LogInFailed(message: e.response!.data['message']);
-        rethrow;
+        yield LogInFailed(message: 'Неправильный email или пароль');
+        throw e;
       } catch (e) {
-        yield LogInFailed(message: 'Что-то пошло не так');
+        yield LogInFailed(message: 'Произошла ошибка');
+        throw e;
       }
     }
   }

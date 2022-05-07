@@ -1,14 +1,14 @@
 import 'package:flutter/cupertino.dart';
 
 class CustomFavouriteButton extends StatefulWidget {
-  CustomFavouriteButton({
+  const CustomFavouriteButton({
     Key? key,
     required this.liked,
     required this.onChanged,
   }) : super(key: key);
 
-  bool liked;
-  Function onChanged;
+  final bool liked;
+  final Function onChanged;
 
   @override
   State<CustomFavouriteButton> createState() => _CustomFavouriteButtonState();

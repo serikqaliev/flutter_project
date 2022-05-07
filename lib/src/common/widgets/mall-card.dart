@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/cupertino.dart';
 import '../constants/color_constants.dart';
 import '../constants/padding_constants.dart';
