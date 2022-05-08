@@ -1,15 +1,13 @@
 // ignore_for_file: prefer_const_constructors
-import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lesson_1/src/common/constants/color_constants.dart';
-import 'package:lesson_1/src/common/constants/padding_constants.dart';
-import 'package:lesson_1/src/common/widgets/custom_button.dart';
-import 'package:lesson_1/src/common/widgets/custom_text_field.dart';
-import 'package:lesson_1/src/common/widgets/text_field_divider.dart';
-import 'package:lesson_1/src/screens/auth/bloc/log_in_bloc.dart';
+import 'package:flutter/cupertino.dart';
+import 'bloc/log_in_bloc.dart';
 import '../../router/router_const.dart';
-import 'package:lesson_1/src/screens/registration/registration_screen.dart';
+import '../../common/constants/color_constants.dart';
+import '../../common/constants/padding_constants.dart';
+import '../../common/widgets/custom_button.dart';
+import '../../common/widgets/custom_text_field.dart';
+import '../../common/widgets/text_field_divider.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({Key? key}) : super(key: key);
@@ -19,8 +17,6 @@ class AuthScreen extends StatefulWidget {
 }
 
 class _AuthScreenState extends State<AuthScreen> {
-  Dio dio = Dio();
-
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -95,14 +91,7 @@ class _AuthScreenState extends State<AuthScreen> {
               child: CustomButton(
                 title: 'Зарегистрироваться',
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    CupertinoPageRoute(
-                      builder: (BuildContext context) {
-                        return RegistrationScreen();
-                      },
-                    ),
-                  );
+                  Navigator.pushNamed(context, RegistrationRoute);
                 },
               ),
             )

@@ -2,8 +2,11 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lesson_1/src/common/constants/color_constants.dart';
 import 'package:lesson_1/src/router/router_const.dart';
+import 'package:lesson_1/src/screens/auth/bloc/log_in_bloc.dart';
+import 'package:lesson_1/src/screens/registration/bloc/registration_bloc.dart';
 import '../../common/widgets/custom_button.dart';
 import '../../common/widgets/custom_text_field.dart';
 import '../../common/widgets/text_field_divider.dart';
@@ -16,11 +19,11 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
-  final loginController = TextEditingController();
+  final emailController = TextEditingController();
+
+  final nicknameController = TextEditingController();
 
   final phoneController = TextEditingController();
-
-  final emailController = TextEditingController();
 
   final passwordController = TextEditingController();
 
@@ -42,18 +45,18 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               children: [
                 SizedBox(height: 32),
                 CustomTextField(
+                  placeholder: 'Почта',
+                  controller: emailController,
+                ),
+                TextFieldDivider(),
+                CustomTextField(
                   placeholder: 'Логин',
-                  controller: loginController,
+                  controller: nicknameController,
                 ),
                 TextFieldDivider(),
                 CustomTextField(
                   placeholder: 'Телефон',
                   controller: phoneController,
-                ),
-                TextFieldDivider(),
-                CustomTextField(
-                  placeholder: 'Почта',
-                  controller: emailController,
                 ),
                 TextFieldDivider(),
                 CustomTextField(
@@ -68,10 +71,44 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               children: [
                 Padding(
                   padding: EdgeInsets.only(left: 16, right: 16),
-                  child: CustomButton(
-                    title: 'Создать аккаунт',
-                    onPressed: () {
-                      Navigator.pushNamed(context, AuthRoute);
+                  child: BlocConsumer<RegistrationBloc, RegistrationState>(
+                    listener: (context, state) {
+                      if (state is RegistrationLoaded) {
+                        Navigator.pushReplacementNamed(context, HomeRoute);
+                      } else if (state is RegistrationFailed) {
+                        showCupertinoModalPopup(
+                          context: context,
+                          builder: (context) {
+                            return CupertinoAlertDialog(
+                              title: Text('Ошибка'),
+                              content: Text(state.message),
+                              actions: [
+                                CupertinoButton(
+                                  child: Text('OK'),
+                                  onPressed: () => Navigator.pop(context),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      }
+                    },
+                    builder: (context, state) {
+                      return CustomButton(
+                        title: 'Создать аккаунт',
+                        onPressed: state is RegistrationLoading
+                            ? null
+                            : () {
+                                context.read<RegistrationBloc>().add(
+                                      RegistrationPressed(
+                                        email: emailController.text,
+                                        nickname: nicknameController.text,
+                                        phone: phoneController.text,
+                                        password: passwordController.text,
+                                      ),
+                                    );
+                              },
+                      );
                     },
                   ),
                 ),
