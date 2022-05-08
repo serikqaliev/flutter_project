@@ -40,12 +40,12 @@ class LogInBloc extends Bloc<LogInEvent, LogInState> {
         tokensBox.put('refresh', tokensModel.refresh);
 
         yield LogInLoaded();
-      } on DioError catch (e) {
+      } on DioError {
         yield LogInFailed(message: 'Неправильный email или пароль');
-        throw e;
+        rethrow;
       } catch (e) {
         yield LogInFailed(message: 'Произошла ошибка');
-        throw e;
+        rethrow;
       }
     }
   }

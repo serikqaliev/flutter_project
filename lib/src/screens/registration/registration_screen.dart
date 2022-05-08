@@ -1,12 +1,8 @@
-// ignore_for_file: prefer_const_constructors
-// ignore_for_file: prefer_const_literals_to_create_immutables
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lesson_1/src/common/constants/color_constants.dart';
-import 'package:lesson_1/src/router/router_const.dart';
-import 'package:lesson_1/src/screens/auth/bloc/log_in_bloc.dart';
-import 'package:lesson_1/src/screens/registration/bloc/registration_bloc.dart';
+import 'bloc/registration_bloc.dart';
+import '../../router/router_const.dart';
+import '../../common/constants/color_constants.dart';
 import '../../common/widgets/custom_button.dart';
 import '../../common/widgets/custom_text_field.dart';
 import '../../common/widgets/text_field_divider.dart';
@@ -31,7 +27,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       backgroundColor: AppColors.scaffoldBackground,
-      navigationBar: CupertinoNavigationBar(
+      navigationBar: const CupertinoNavigationBar(
         border: Border(),
         backgroundColor: AppColors.white,
         middle: Text('Регистрация'),
@@ -43,34 +39,34 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           children: [
             Column(
               children: [
-                SizedBox(height: 32),
+                const SizedBox(height: 32),
                 CustomTextField(
                   placeholder: 'Почта',
                   controller: emailController,
                 ),
-                TextFieldDivider(),
+                const TextFieldDivider(),
                 CustomTextField(
                   placeholder: 'Логин',
                   controller: nicknameController,
                 ),
-                TextFieldDivider(),
+                const TextFieldDivider(),
                 CustomTextField(
                   placeholder: 'Телефон',
                   controller: phoneController,
                 ),
-                TextFieldDivider(),
+                const TextFieldDivider(),
                 CustomTextField(
                   placeholder: 'Пароль',
                   controller: passwordController,
                 ),
-                TextFieldDivider(),
+                const TextFieldDivider(),
               ],
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(left: 16, right: 16),
+                  padding: const EdgeInsets.only(left: 16, right: 16),
                   child: BlocConsumer<RegistrationBloc, RegistrationState>(
                     listener: (context, state) {
                       if (state is RegistrationLoaded) {
@@ -80,11 +76,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           context: context,
                           builder: (context) {
                             return CupertinoAlertDialog(
-                              title: Text('Ошибка'),
+                              title: const Text('Ошибка'),
                               content: Text(state.message),
                               actions: [
                                 CupertinoButton(
-                                  child: Text('OK'),
+                                  child: const Text('OK'),
                                   onPressed: () => Navigator.pop(context),
                                 ),
                               ],
@@ -112,7 +108,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     },
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 36,
                 )
               ],
